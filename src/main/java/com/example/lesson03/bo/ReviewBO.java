@@ -12,9 +12,9 @@ public class ReviewBO {
 	private ReviewMapper reviewMapper;
 	
 	
-	//input: x
+	//input: id
 	//output: Review
-	public Review getReview() {
-		return  reviewMapper.selectReview();
+	public Review getReviewById(int id) { // 만약 request로 id 값이 null 로 오면 BO쪽에서 null인걸 받을 수 없어서 에러
+		return  reviewMapper.selectReviewById(id);
 	}
 }
