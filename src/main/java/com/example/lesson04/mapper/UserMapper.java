@@ -8,11 +8,10 @@ import com.example.lesson04.domain.User;
 @Repository
 public interface UserMapper {
 
-	public int insertUser(
-			@Param("name")String name, 
-			@Param("yyyymmdd")String yyyymmdd, 
-			@Param("email")String email, 
-			@Param("introduce")String introduce);
-	
+	public int insertUser(@Param("name") String name, @Param("yyyymmdd") String yyyymmdd, @Param("email") String email,
+			@Param("introduce") String introduce);
+
 	public User selectLatestUser();
+
+	public boolean isDuplicationByName(String name);
 }
