@@ -1,6 +1,7 @@
 package com.example.lesson04.bo;
 
 import java.time.ZonedDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,52 @@ public class StudentBO {
 		
 		return studentRepository.save(student);//save(entity)
 	}
+	
+	
+	//JPA로 update
+	public StudentEntity updateStudentDreamjob (int id, String dreamJob) {
+		//id가 이미 있으면 update구나
+		//id가 없으면 insert구나
+		
+		//select   orElse:find를 해서 가져왔을 때 가져온 값이null 이라면 뭘로 정의할지? 정하는 것 ex) null
+		StudentEntity student = studentRepository.findById(id).orElse(null);
+		
+		//update -> save
+		if (student != null) { //student가 null 이 아닐 떄
+			student = student.toBuilder() //기존 필드 값들은 유지하고 일부 필드만 변경 - toBuilder
+			.dreamJob(dreamJob)
+			.build(); // ★★★반드시 다시 저장한다!!★★★
+		}
+		
+		student = studentRepository.save(student);
+		
+		return student; //student or null
+	}
+	
+	
+	//JPA로 delete
+	public void deleteStudentById(int id) {
+		//select 후에 delete해야함
+		
+		//방법 1)
+//		StudentEntity student = studentRepository.findById(id).orElse(null);
+		
+		//delete
+//		if(student != null ) {
+//			studentRepository.delete(student);
+//		}
+		
+		//방법 2) 
+		//Optional :null 검사 생략
+		Optional<StudentEntity> studentOptional = studentRepository.findById(id);
+		//delete
+		studentOptional.ifPresent(s -> studentRepository.delete(s)); //s가 있다면 -> 삭제해
+		
+	}
+	
+	
+	
+	
 	
 	
 	

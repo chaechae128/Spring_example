@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString  //객체 출력 시 필드 값이 보여진다. //이 안에 있는 값을 예쁘게 뿌려줌 없어도 되지만 있으면 좋음  
 @AllArgsConstructor //모든 필드가 파라미터로 있는 생성자
 @NoArgsConstructor //파라미터가 없는 생성자
-@Builder //setter대신 사용
+@Builder(toBuilder = true) //@Builder 이건 초기 세팅만 가능함 -> toBuilder가 true라면  필드값 변경 허용
 @Getter
 @Table(name = "new_student") //이걸 안 쓰면 StudentEntity이게 테이블 명인줄 알고 있음 그래서 테이블 명 명시
 @Entity //이 객체는 엔티티다. (JPA - DB) 둘이 소통할 때 이 객체를 가지고 함
